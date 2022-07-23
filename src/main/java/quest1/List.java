@@ -1,4 +1,4 @@
-package quest1.list;
+package quest1;
 
 public interface List<E> {
     /**
