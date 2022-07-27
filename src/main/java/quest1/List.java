@@ -4,17 +4,19 @@ public interface List<E> {
     /**
      * Adds element to the end of this list
      *
+     * @param element to be added
      * @return added element
      */
-    E add();
+    E add(E element);
 
     /**
      * Inserts the element to the specified index shifting elements to the right
      *
-     * @param index index of this list
+     * @param index   index of this list
+     * @param element to be added
      * @return added element
      */
-    E add(int index);
+    E add(int index, E element);
 
     /**
      * Replaces element at the specified index
