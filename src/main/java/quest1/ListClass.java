@@ -26,18 +26,25 @@ public class ListClass<E> implements List<E> {
         if (size == array.length) {
             increaseSize();
         }
+        Object[] arrayCopy = array;
+        if (array.length - index >= 0) {
+            System.arraycopy(arrayCopy, index, array, index + 1, array.length - index);
+        }
+        array[index] = element;
+        size++;
 
-
-        return null;
+        return element;
     }
 
     @Override
     public E replace(E element, int index) {
-        return null;
+        array[index] = element;
+        return element;
     }
 
     @Override
     public E remove(E element) {
+
         return null;
     }
 
