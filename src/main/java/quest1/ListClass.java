@@ -8,6 +8,7 @@ public class ListClass<E> implements List<E> {
         Object[] arrayCopy = array;
         array = new Object[arrayCopy.length * 2];
         System.arraycopy(arrayCopy, 0, array, 0, array.length);
+
     }
 
     @Override
