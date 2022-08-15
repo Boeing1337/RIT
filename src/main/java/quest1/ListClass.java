@@ -1,14 +1,18 @@
 package quest1;
 
+import java.util.Arrays;
+
 public class ListClass<E> implements List<E> {
     Object[] array = new Object[10];
     int size = 0;
 
-    private void increaseSize() {
-        Object[] arrayCopy = array;
-        array = new Object[arrayCopy.length * 2];
-        System.arraycopy(arrayCopy, 0, array, 0, array.length);
 
+    @Override
+    public String toString() {
+        return Arrays.toString(array);
+    }
+
+    private void increaseSize() {array = Arrays.copyOf(array, array.length * 2);
     }
 
     @Override
@@ -26,9 +30,9 @@ public class ListClass<E> implements List<E> {
         if (size == array.length) {
             increaseSize();
         }
-        Object[] arrayCopy = array;
+
         if (array.length - index >= 0) {
-            System.arraycopy(arrayCopy, index, array, index + 1, array.length - index);
+            System.arraycopy(array, index, array, index + 1, array.length - index);
         }
         array[index] = element;
         size++;
@@ -55,7 +59,7 @@ public class ListClass<E> implements List<E> {
 
     @Override
     public int size() {
-        return 0;
+        return array.length;
     }
 
     @Override
