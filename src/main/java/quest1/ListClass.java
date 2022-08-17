@@ -3,8 +3,8 @@ package quest1;
 import java.util.Arrays;
 
 public class ListClass<E> implements List<E> {
-    Object[] array = new Object[10];
-    int size = 0;
+    private Object[] array = new Object[10];
+    private int size = 0;
 
 
     @Override
@@ -12,7 +12,13 @@ public class ListClass<E> implements List<E> {
         return Arrays.toString(array);
     }
 
-    private void increaseSize() {array = Arrays.copyOf(array, array.length * 2);
+    private void increaseSize() {
+        array = Arrays.copyOf(array, array.length * 2);
+    }
+
+    private void shiftToTheLeft(int i) {
+        System.arraycopy(array, i + 1, array, i, array.length - i - 1);
+        array[array.length - 1] = null;
     }
 
     @Override
@@ -30,10 +36,7 @@ public class ListClass<E> implements List<E> {
         if (size == array.length) {
             increaseSize();
         }
-
-        if (array.length - index >= 0) {
-            System.arraycopy(array, index, array, index + 1, array.length - index);
-        }
+        System.arraycopy(array, index, array, index + 1, array.length - index - 1);
         array[index] = element;
         size++;
 
@@ -48,27 +51,46 @@ public class ListClass<E> implements List<E> {
 
     @Override
     public E remove(E element) {
-
-        return null;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == element) {
+                shiftToTheLeft(i);
+            }
+        }
+        return element;
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public E remove(int index) {
-        return null;
+        Object removed = array[index];
+        System.arraycopy(array, index + 1, array, index, array.length - index - 1);
+        array[array.length - 1] = null;
+        return (E) removed;
     }
 
     @Override
     public int size() {
-        return array.length;
+        int counter = 0;
+        for (Object o : array) {
+            if (o != null) {
+                counter++;
+            }
+        }
+        return counter;
     }
 
     @Override
     public void reduce() {
-
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == null) {
+                shiftToTheLeft(i);
+            }
+        }
     }
 
     @Override
-    public E[] toArray(E[] array) {
-        return array;
+    public E[] toArray(E[] arr) {
+        System.arraycopy(array, 0, arr, 0, arr.length);
+        return arr;
     }
 }
