@@ -14,16 +14,24 @@ public interface List<E> {
      *
      * @param index   index of this list
      * @param element to be added
-     * @return added element
+     * @return previous element at the specified index
      */
     E add(int index, E element);
+
+    /**
+     * returns an element from the specified index
+     *
+     * @param index index of this list
+     * @return an element from the specified index
+     */
+    E get(int index);
 
     /**
      * Replaces element at the specified index
      *
      * @param element an element for replacing
      * @param index   index of this list
-     * @return added element
+     * @return replaced element
      */
     E replace(E element, int index);
 
@@ -31,7 +39,7 @@ public interface List<E> {
      * Removes the first element equals to specified shifting all elements from the right to the left
      *
      * @param element an element to be removed
-     * @return added element
+     * @return removed element
      */
     E remove(E element);
 
@@ -39,7 +47,7 @@ public interface List<E> {
      * Removes element at the specified index shifting all elements from the right to the left
      *
      * @param index index of this list
-     * @return added element
+     * @return removed element
      */
     E remove(int index);
 
