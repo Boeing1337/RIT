@@ -1,7 +1,8 @@
 package quest1;
 
 import java.util.Arrays;
-
+import java.util.Objects;
+@SuppressWarnings("unchecked")
 public class ListClass<E> implements List<E> {
     private Object[] array = new Object[10];
     private int size = 0;
@@ -33,15 +34,18 @@ public class ListClass<E> implements List<E> {
     }
 
     @Override
+
     public E add(int index, E element) {
         if (size == array.length) {
             increaseSize();
         }
+
         System.arraycopy(array, index, array, index + 1, array.length - index - 1);
         array[index] = element;
+
         size++;
 
-        return element;
+        return (E) array[index+1];
     }
 
     @Override
@@ -60,9 +64,10 @@ public class ListClass<E> implements List<E> {
 
     @Override
     public E remove(E element) {
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] == element) {
+        for (int i = 0; i < size; i++) {
+            if (Objects.equals(array[i], element)) {
                 shiftToTheLeft(i);
+                break;
             }
         }
         return element;
@@ -98,10 +103,10 @@ public class ListClass<E> implements List<E> {
     @Override
     @SuppressWarnings("unchecked")
     public E[] toArray(E[] newArray) {
-        if (newArray.length < array.length) {
-            newArray = (E[]) Arrays.copyOf(array, array.length, newArray.getClass());
+        if (newArray.length < size) {
+            newArray = (E[]) Arrays.copyOf(array, size, newArray.getClass());
         } else {
-            System.arraycopy(array, 0, newArray, 0, array.length);
+            System.arraycopy(array, 0, newArray, 0, size);
         }
         return newArray;
 
