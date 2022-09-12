@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ListImplTestRIT {
 
-    private final List<MyClass> target = new ListImpl<>();
+    private final List<MyClass> target = new ListClass<>();
 
     @Test
     void addTwo() {
@@ -159,7 +159,7 @@ class ListImplTestRIT {
         fillList(9);
         target.add(elementIndex9);
 
-        var result = target.remove(elementIndex9);
+        var result = target.remove(new MyClass(10));
 
         assertAll(
                 () -> assertEquals(
